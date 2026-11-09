@@ -1,0 +1,24 @@
+@startuml seq-uc03
+' Figure 5.2.2 Analysis sequence diagram for UC-03 Save a Favorite Recipe
+' Numbered messages match the scenario table rows in 5.2.2 (b). Dashed returns carry no number.
+skinparam shadowing false
+skinparam sequenceMessageAlign left
+skinparam participant {
+  BackgroundColor White
+  BorderColor Black
+}
+hide footbox
+actor User
+participant "RecipePanel" as RP
+participant "FavoritesList" as FL
+participant ":Favorite" as F
+
+User -> RP : 1 asks to save the displayed recipe
+activate RP
+RP -> FL : 2 asks whether the user already\nhas this recipe as a favorite
+FL --> RP : not yet saved
+RP -> F ** : 3 creates a favorite with the date saved
+RP -> FL : 4 adds the favorite to the user's favorites
+RP -> User : 5 confirms the recipe is now a favorite
+deactivate RP
+@enduml

@@ -1,0 +1,56 @@
+@startuml domain-model
+' Figure 5.1 Cooket domain model (conceptual classes only: no operations, no types)
+hide circle
+hide methods
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam shadowing false
+skinparam class {
+  BackgroundColor White
+  BorderColor Black
+}
+
+class User {
+  email
+  display name
+}
+class Search {
+  search mode
+  flavor preference
+  food type
+  texture preference
+  submitted time
+}
+class Ingredient {
+  name
+}
+class Recipe {
+  title
+  ordered instructions
+  popularity
+}
+class RecipeIngredient {
+  quantity
+  unit
+}
+class RecipeSource {
+  site name
+  source reference
+}
+class MatchResult {
+  match score
+}
+class Favorite {
+  date saved
+}
+
+User "1" -- "0..*" Search : submits >
+User "1" -- "0..*" Favorite : keeps >
+Search "0..*" -- "1..*" Ingredient : lists >
+Search "1" -- "0..*" MatchResult : produces >
+MatchResult "0..*" -- "1" Recipe : ranks >
+Favorite "0..*" -- "1" Recipe : refers to >
+Recipe "1" -- "1..*" RecipeIngredient : requires >
+RecipeIngredient "0..*" -- "1" Ingredient : names >
+RecipeSource "1" -- "0..*" Recipe : publishes >
+@enduml

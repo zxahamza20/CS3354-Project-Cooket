@@ -1,0 +1,48 @@
+@startuml deployment-view
+' Figure 6.4 Cooket UML deployment diagram (physical view)
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam node {
+  BackgroundColor White
+  BorderColor Black
+}
+skinparam artifact {
+  BackgroundColor White
+}
+left to right direction
+
+rectangle "Trust zone A: untrusted (user's device)" as TZA #line.dashed {
+  node "User's device" <<device>> as DEV {
+    node "Web browser" <<executionEnvironment>> as BR {
+      artifact "cooket-web\n(built React bundle)\n[Web Client]" as A1
+    }
+  }
+}
+
+rectangle "Trust zone B: trusted (our application server)" as TZB #line.dashed {
+  node "Cloud application server" <<server>> as SRV {
+    node "Node.js 22 runtime" <<executionEnvironment>> as NODE {
+      artifact "cooket-api (server.js)\n[Search API, Match Scorer,\nAccount & Favorites Service]" as A2
+      artifact "db module (backend/db)\n[Recipe Store]" as A7
+      artifact "scraper module\n(search.js, extract.js)\n[Recipe Finder]" as A3
+      artifact ".env (API keys, not in Git)" as A4
+    }
+    node "Headless Chromium\n(Playwright)" <<executionEnvironment>> as CH {
+      artifact "chromium browser binary\n(page loader for Recipe Finder)" as A6
+    }
+  }
+}
+
+rectangle "Trust zone C: third-party services (outside our boundary)" as TZC #line.dashed {
+  node "Tavily Search API" <<external service>> as TV
+  node "Recipe websites" <<external service>> as RW
+  node "Supabase cloud" <<external service>> as SB {
+    artifact "cooket schema:\nrecipes, users, favorites\n(row-level security on)" as A5
+  }
+}
+
+DEV -- SRV : HTTPS (REST/JSON)
+SRV -- TV : HTTPS (REST/JSON)
+SRV -- RW : HTTPS (HTML + schema.org JSON-LD)
+SRV -- SB : HTTPS (Supabase Auth + PostgREST)
+@enduml

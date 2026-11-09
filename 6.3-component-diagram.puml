@@ -1,0 +1,59 @@
+@startuml component-view
+' Figure 6.3 Cooket component diagram (logical view)
+' Lollipop (solid line + circle) = provided interface; dashed arrow to a circle = required interface.
+skinparam shadowing false
+skinparam componentStyle uml2
+skinparam defaultFontName Arial
+skinparam nodesep 40
+skinparam ranksep 45
+skinparam component {
+  BackgroundColor White
+  BorderColor Black
+}
+
+actor User
+
+rectangle "Cooket system boundary" {
+  rectangle "Presentation layer" {
+    component "Web Client" as WC
+  }
+  rectangle "Application layer" {
+    interface "RecipeSearch" as I_RS
+    interface "Authentication" as I_AU
+    interface "Favorites" as I_FV
+    component "Search API" as SA
+    component "Account & Favorites Service" as AF
+    interface "RecipeStorage" as I_RST
+    interface "RecipeLookup" as I_RL
+    interface "MatchScoring" as I_MS
+    component "Recipe Store" as RST
+    component "Recipe Finder" as RF
+    component "Match Scorer" as MS
+  }
+}
+
+rectangle "External systems (outside our boundary)" {
+  component "Tavily Search API" <<external>> as TV
+  component "Recipe websites" <<external>> as RW
+  component "Supabase (Auth + Postgres)" <<external>> as SB
+}
+
+User --> WC : uses
+WC ..> I_RS
+WC ..> I_AU
+WC ..> I_FV
+I_RS -- SA
+I_AU -- AF
+I_FV -- AF
+SA ..> I_AU
+SA ..> I_RST
+SA ..> I_RL
+SA ..> I_MS
+I_RST -- RST
+I_RL -- RF
+I_MS -- MS
+RF ..> TV : WebSearch
+RF ..> RW : RecipePages
+AF ..> SB : UserStore
+RST ..> SB : RecipeData
+@enduml

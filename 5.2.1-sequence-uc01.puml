@@ -1,0 +1,30 @@
+@startuml seq-uc01
+' Figure 5.2.1 Analysis sequence diagram for UC-01 Find Recipes Using Available Ingredients
+' Numbered messages match the scenario table rows in 5.2.1 (b). Dashed returns carry no number.
+skinparam shadowing false
+skinparam sequenceMessageAlign left
+skinparam participant {
+  BackgroundColor White
+  BorderColor Black
+}
+hide footbox
+actor User
+participant "SearchPanel" as SP
+participant ":Search" as S
+participant "RecipeCatalog" as RC
+participant "MatchScorer" as MS
+participant ":MatchResult" as MR
+
+User -> SP : 1 submits search criteria\n(ingredients, mode, preferences)
+activate SP
+SP -> S ** : 2 records a new search
+SP -> RC : 3 asks for recipes that use\nany submitted ingredient
+RC --> SP : candidate recipes
+SP -> MS : 4 asks to score and rank the\ncandidates under the search mode
+activate MS
+MS -> MR ** : 5 creates a match result for\neach qualifying recipe
+MS --> SP : ranked match results
+deactivate MS
+SP -> User : 6 displays matching recipes\n(title, source reference, match score)
+deactivate SP
+@enduml
