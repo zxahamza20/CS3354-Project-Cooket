@@ -3,12 +3,17 @@ import { chromium } from "playwright";
 import { buildQuery, searchRecipes } from "../scraper/search.js";
 import { extractRecipe } from "../scraper/extract.js";
 import { rankRecipes } from "../scraper/score.js";
+import { findStoredRecipes, saveRecipes } from "../db/recipes.js";
 
 const MODES = ["flexible", "strict"];
 
 const router = Router();
 
 export async function scrapeRecipes(params) {
+  // Use stored recipes when the database has enough good matches it skips the slow live scrape
+  const stored = await findStoredRecipes(params.ingredients);
+  if (stored) return rankRecipes(stored, params);
+
   const urls = await searchRecipes(buildQuery(params.ingredients));
 
   const browser = await chromium.launch();
@@ -16,7 +21,10 @@ export async function scrapeRecipes(params) {
     const pages = await Promise.all(
       urls.map((url) => extractRecipe(browser, url)),
     );
-    return rankRecipes(pages.filter(Boolean), params);
+    const recipes = pages.filter(Boolean);
+    // Saved before ranking b/c rankRecipes() strips the text field used for breaking ties
+    await saveRecipes(recipes);
+    return rankRecipes(recipes, params);
   } finally {
     await browser.close();
   }
