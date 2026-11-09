@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="720" viewBox="0 0 1240 720" font-family="Arial, Helvetica, sans-serif">
+  <rect width="1240" height="720" fill="#ffffff"/>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
+    </marker>
+  </defs>
+
+  <!-- Trust zones -->
+  <rect x="15" y="40" width="320" height="560" fill="#fdf3f3" stroke="#b03030" stroke-width="2" stroke-dasharray="10,6"/>
+  <text x="25" y="62" font-size="14" font-weight="bold" fill="#b03030">Trust zone: user-controlled (untrusted)</text>
+  <rect x="375" y="40" width="400" height="560" fill="#f1f8f1" stroke="#2f7a3a" stroke-width="2" stroke-dasharray="10,6"/>
+  <text x="385" y="62" font-size="14" font-weight="bold" fill="#2f7a3a">Trust zone: team-controlled (trusted)</text>
+  <rect x="885" y="40" width="340" height="560" fill="#f3f5fb" stroke="#34508f" stroke-width="2" stroke-dasharray="10,6"/>
+  <text x="895" y="62" font-size="14" font-weight="bold" fill="#34508f">Outside our control (third-party)</text>
+
+  <!-- Node: user's computer -->
+  <polygon points="40,110 52,98 312,98 300,110" fill="#e6e6e6" stroke="#333"/>
+  <polygon points="300,110 312,98 312,488 300,500" fill="#d4d4d4" stroke="#333"/>
+  <rect x="40" y="110" width="260" height="390" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+  <text x="170" y="132" font-size="12" text-anchor="middle" font-style="italic">&#171;device&#187;</text>
+  <text x="170" y="150" font-size="15" text-anchor="middle" font-weight="bold">User's computer</text>
+  <rect x="58" y="170" width="224" height="200" fill="#fafafa" stroke="#555"/>
+  <text x="170" y="190" font-size="12" text-anchor="middle" font-style="italic">&#171;execution environment&#187;</text>
+  <text x="170" y="207" font-size="14" text-anchor="middle" font-weight="bold">Web browser</text>
+  <rect x="74" y="228" width="192" height="70" fill="#fff8e6" stroke="#8a6d1f"/>
+  <text x="170" y="248" font-size="12" text-anchor="middle" font-style="italic">&#171;artifact&#187;</text>
+  <text x="170" y="266" font-size="13" text-anchor="middle" font-weight="bold">Cooket frontend</text>
+  <text x="170" y="284" font-size="12" text-anchor="middle">React app (built by Vite)</text>
+
+  <!-- Node: application server -->
+  <polygon points="395,110 407,98 747,98 735,110" fill="#e6e6e6" stroke="#333"/>
+  <polygon points="735,110 747,98 747,568 735,580" fill="#d4d4d4" stroke="#333"/>
+  <rect x="395" y="110" width="340" height="470" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+  <text x="565" y="132" font-size="12" text-anchor="middle" font-style="italic">&#171;device&#187;</text>
+  <text x="565" y="150" font-size="15" text-anchor="middle" font-weight="bold">Cooket application server</text>
+  <rect x="412" y="165" width="306" height="400" fill="#fafafa" stroke="#555"/>
+  <text x="565" y="185" font-size="12" text-anchor="middle" font-style="italic">&#171;execution environment&#187;</text>
+  <text x="565" y="202" font-size="14" text-anchor="middle" font-weight="bold">Node.js runtime</text>
+  <rect x="428" y="215" width="274" height="175" fill="#fff8e6" stroke="#8a6d1f"/>
+  <text x="565" y="234" font-size="12" text-anchor="middle" font-style="italic">&#171;artifact&#187;</text>
+  <text x="565" y="252" font-size="13" text-anchor="middle" font-weight="bold">Express backend (server.js)</text>
+  <text x="442" y="278" font-size="12">&#8226; Search API (/api/webscrape)</text>
+  <text x="442" y="300" font-size="12">&#8226; Scraper (search.js, extract.js)</text>
+  <text x="442" y="322" font-size="12">&#8226; Match Scorer (score.js)</text>
+  <text x="442" y="344" font-size="12">&#8226; Recipe Store (backend/db)</text>
+  <text x="442" y="372" font-size="11" fill="#555">Recipe Store falls back to scraping if Supabase fails</text>
+  <rect x="428" y="402" width="274" height="62" fill="#fff8e6" stroke="#8a6d1f"/>
+  <text x="565" y="421" font-size="12" text-anchor="middle" font-style="italic">&#171;artifact&#187;</text>
+  <text x="565" y="439" font-size="13" text-anchor="middle" font-weight="bold">Headless Chromium</text>
+  <text x="565" y="456" font-size="12" text-anchor="middle">(Playwright, used by the Scraper)</text>
+  <rect x="428" y="476" width="274" height="74" fill="#fff0f0" stroke="#b03030"/>
+  <text x="565" y="495" font-size="12" text-anchor="middle" font-style="italic">&#171;artifact&#187;</text>
+  <text x="565" y="513" font-size="13" text-anchor="middle" font-weight="bold">.env (local secrets)</text>
+  <text x="565" y="531" font-size="12" text-anchor="middle">Supabase secret key, Tavily key</text>
+  <text x="565" y="545" font-size="11" text-anchor="middle" fill="#555">excluded from Git by .gitignore</text>
+
+  <!-- Node: Supabase -->
+  <polygon points="905,100 917,88 1207,88 1195,100" fill="#e6e6e6" stroke="#333"/>
+  <polygon points="1195,100 1207,88 1207,258 1195,270" fill="#d4d4d4" stroke="#333"/>
+  <rect x="905" y="100" width="290" height="170" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+  <text x="1050" y="120" font-size="12" text-anchor="middle" font-style="italic">&#171;cloud service&#187;</text>
+  <text x="1050" y="138" font-size="15" text-anchor="middle" font-weight="bold">Supabase (free tier)</text>
+  <rect x="920" y="150" width="260" height="108" fill="#fafafa" stroke="#555"/>
+  <text x="1050" y="168" font-size="12" text-anchor="middle" font-style="italic">&#171;execution environment&#187;</text>
+  <text x="1050" y="185" font-size="14" text-anchor="middle" font-weight="bold">PostgreSQL</text>
+  <rect x="934" y="194" width="232" height="56" fill="#fff8e6" stroke="#8a6d1f"/>
+  <text x="1050" y="213" font-size="13" text-anchor="middle" font-weight="bold">recipes table</text>
+  <text x="1050" y="230" font-size="11" text-anchor="middle">Row Level Security on; backend role</text>
+  <text x="1050" y="244" font-size="11" text-anchor="middle">has select, insert, update only</text>
+
+  <!-- Node: Tavily -->
+  <polygon points="905,320 917,308 1207,308 1195,320" fill="#e6e6e6" stroke="#333"/>
+  <polygon points="1195,320 1207,308 1207,408 1195,420" fill="#d4d4d4" stroke="#333"/>
+  <rect x="905" y="320" width="290" height="100" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+  <text x="1050" y="345" font-size="12" text-anchor="middle" font-style="italic">&#171;external system&#187;</text>
+  <text x="1050" y="365" font-size="15" text-anchor="middle" font-weight="bold">Tavily Search API</text>
+  <text x="1050" y="388" font-size="12" text-anchor="middle">returns recipe page URLs</text>
+
+  <!-- Node: recipe websites -->
+  <polygon points="905,470 917,458 1207,458 1195,470" fill="#e6e6e6" stroke="#333"/>
+  <polygon points="1195,470 1207,458 1207,568 1195,580" fill="#d4d4d4" stroke="#333"/>
+  <rect x="905" y="470" width="290" height="110" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+  <text x="1050" y="495" font-size="12" text-anchor="middle" font-style="italic">&#171;external system&#187;</text>
+  <text x="1050" y="515" font-size="15" text-anchor="middle" font-weight="bold">Recipe websites</text>
+  <text x="1050" y="538" font-size="12" text-anchor="middle">schema.org Recipe pages</text>
+  <text x="1050" y="556" font-size="11" text-anchor="middle" fill="#555">data treated as untrusted input</text>
+
+  <!-- Communication paths -->
+  <line x1="312" y1="263" x2="393" y2="263" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="353" y="250" font-size="12" text-anchor="middle" font-weight="bold">HTTPS</text>
+  <text x="353" y="282" font-size="11" text-anchor="middle">GET</text>
+  <text x="353" y="296" font-size="11" text-anchor="middle">/api/webscrape</text>
+
+  <line x1="747" y1="200" x2="903" y2="200" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="826" y="190" font-size="12" text-anchor="middle" font-weight="bold">HTTPS</text>
+  <text x="826" y="218" font-size="11" text-anchor="middle">Supabase Data API</text>
+  <text x="826" y="232" font-size="11" text-anchor="middle">(secret key,</text>
+  <text x="826" y="246" font-size="11" text-anchor="middle">server only)</text>
+
+  <line x1="747" y1="370" x2="903" y2="370" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="826" y="360" font-size="12" text-anchor="middle" font-weight="bold">HTTPS</text>
+  <text x="826" y="388" font-size="11" text-anchor="middle">search request</text>
+
+  <line x1="747" y1="525" x2="903" y2="525" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="826" y="515" font-size="12" text-anchor="middle" font-weight="bold">HTTPS</text>
+  <text x="826" y="543" font-size="11" text-anchor="middle">page fetch</text>
+
+  <!-- Shared responsibility note -->
+  <rect x="15" y="620" width="1210" height="85" fill="#ffffff" stroke="#999"/>
+  <text x="28" y="643" font-size="13" font-weight="bold">Shared responsibility (Supabase):</text>
+  <text x="28" y="664" font-size="12">Supabase runs the database servers, storage, backups and uptime. Our team owns the schema, Row Level Security, the role grants,</text>
+  <text x="28" y="682" font-size="12">and keeping the secret key on the application server only. Dashed boxes are trust boundaries; every arrow that crosses one uses HTTPS.</text>
+</svg>
